@@ -1,21 +1,15 @@
 import * as Localization from "expo-localization"
 import i18n from "i18n-js"
-import { I18nManager } from "react-native"
 
-// if English isn't your default language, move Translations to the appropriate language file.
-import en, { Translations } from "./en"
-import ar from "./ar"
-import ko from "./ko"
-import fr from "./fr"
+import es, { Translations } from "./es"
 
 i18n.fallbacks = true
 
-// to use regional locales use { "en-US": enUS } etc
-i18n.translations = { ar, en, "en-US": en, ko, fr }
+i18n.translations = { "es-DO": es }
 
-const fallbackLocale = "en-US"
+const fallbackLocale = "es-DO"
 const systemLocale = Localization.getLocales()[0]
-const systemLocaleTag = systemLocale?.languageTag ?? "en-US"
+const systemLocaleTag = systemLocale?.languageTag ?? "es-DO"
 
 if (Object.prototype.hasOwnProperty.call(i18n.translations, systemLocaleTag)) {
   // if specific locales like en-FI or en-US is available, set it
@@ -29,11 +23,6 @@ if (Object.prototype.hasOwnProperty.call(i18n.translations, systemLocaleTag)) {
     i18n.locale = fallbackLocale
   }
 }
-
-// handle RTL languages
-export const isRTL = systemLocale?.textDirection === "rtl"
-I18nManager.allowRTL(isRTL)
-I18nManager.forceRTL(isRTL)
 
 /**
  * Builds up valid keypaths for translations.

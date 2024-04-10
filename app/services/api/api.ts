@@ -12,7 +12,10 @@ import {
 import Config from "../../config"
 import type {
   ApiConfig,
+  ApiResponseValues,
+  IVolunteer,
 } from "./api.types"
+import { GeneralApiProblem } from "./apiProblem"
 
 /**
  * Configuring the apisauce instance.
@@ -27,7 +30,8 @@ export const DEFAULT_API_CONFIG: ApiConfig = {
  * various requests that you need to call from your backend API.
  */
 export class Api {
-  apisauce: ApisauceInstance
+  postsauce: ApisauceInstance
+  // getsauce: ApisauceInstance
   config: ApiConfig
 
   /**
@@ -35,15 +39,41 @@ export class Api {
    */
   constructor(config: ApiConfig = DEFAULT_API_CONFIG) {
     this.config = config
-    this.apisauce = create({
+    this.postsauce = create({
       baseURL: this.config.url,
       timeout: this.config.timeout,
       headers: {
-        Accept: "application/json",
+        Accept: 'application/json',
+        'Content-Type': 'multipart/form-data',
       },
     })
   }
 
+  async register(volunteer: IVolunteer): Promise<boolean | GeneralApiProblem> {
+    const newVolunteer = new FormData();
+
+    newVolunteer.append("cedula", volunteer.dni);
+    newVolunteer.append("correo", volunteer.email);
+    newVolunteer.append("clave", volunteer.password);
+    newVolunteer.append("nombre", volunteer.first_name);
+    newVolunteer.append("apellido", volunteer.last_name);
+    newVolunteer.append("telefono", volunteer.phone_number);
+
+    const { data }: ApiResponseValues = await this.postsauce.post("registro.php", newVolunteer);
+
+    return data?.exito ?? false;
+  }
+
+  async login(dni: string, password: string): Promise<{ token: string, success: boolean } | GeneralApiProblem> {
+    const loginVolunteer = new FormData();
+
+    loginVolunteer.append("cedula", dni);
+    loginVolunteer.append("clave", password);
+
+    const { data }: ApiResponseValues = await this.postsauce.post("iniciar_sesion.php", loginVolunteer);
+
+    return { token: "", success: data?.exito ?? false }
+  }
 }
 
 // Singleton instance of the API for convenience

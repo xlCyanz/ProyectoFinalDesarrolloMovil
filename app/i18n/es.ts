@@ -1,14 +1,21 @@
 const en = {
+  MainNavigator: {
+    homeScreen: {
+      tabBarTitle: "Inicio"
+    },
+    aboutScreen: {
+      tabBarTitle: "Acerca de"
+    }
+  },
   common: {
     ok: "OK!",
     cancel: "Cancel",
     back: "Back",
   },
   welcomeScreen: {
-    postscript:
-      "psst  — This probably isn't what your app looks like. (Unless your designer handed you these screens, and in that case, ship it!)",
-    readyForLaunch: "Your app, almost ready for launch!",
-    exciting: "(ohh, this is exciting!)",
+    title: "Proyecto Final de Intr. Desarrollo Movil",
+    subtitle: "Aplicación para la Defensa Civil",
+    access: "Acceder a la aplicación"
   },
   errorScreen: {
     title: "Something went wrong!",

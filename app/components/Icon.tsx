@@ -99,6 +99,10 @@ export const iconRegistry = {
   settings: require("../../assets/icons/settings.png"),
   view: require("../../assets/icons/view.png"),
   x: require("../../assets/icons/x.png"),
+  "home-filled": require("../../assets/icons/home-filled.png"),
+  "home-outline": require("../../assets/icons/home-outline.png"),
+  "info-circle-filled": require("../../assets/icons/info-circle-filled.png"),
+  "info-circle-outline": require("../../assets/icons/info-circle-outline.png"),
 }
 
 const $imageStyleBase: ImageStyle = {

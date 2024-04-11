@@ -8,6 +8,7 @@ import {
   DarkTheme,
   DefaultTheme,
   NavigationContainer,
+  NavigatorScreenParams,
 } from "@react-navigation/native"
 import { createNativeStackNavigator, NativeStackScreenProps } from "@react-navigation/native-stack"
 import { observer } from "mobx-react-lite"
@@ -17,6 +18,7 @@ import * as Screens from "app/screens"
 import Config from "../config"
 import { navigationRef, useBackButtonHandler } from "./navigationUtilities"
 import { colors } from "app/theme"
+import { MainNavigator, MainTabParamList } from "./MainNavigator"
 
 /**
  * This type allows TypeScript to know what routes are defined in this navigator
@@ -32,11 +34,12 @@ import { colors } from "app/theme"
  *   https://reactnavigation.org/docs/typescript/#organizing-types
  */
 export type AppStackParamList = {
-  Login: undefined
   Welcome: undefined
+  Login: undefined
   Register: undefined
+  Main: NavigatorScreenParams<MainTabParamList>
   // 🔥 Your screens go here
-  // IGNITE_GENERATOR_ANCHOR_APP_STACK_PARAM_LIST
+	// IGNITE_GENERATOR_ANCHOR_APP_STACK_PARAM_LIST
 }
 
 /**
@@ -56,14 +59,16 @@ const Stack = createNativeStackNavigator<AppStackParamList>()
 const AppStack = observer(function AppStack() {
   return (
     <Stack.Navigator
-      initialRouteName="Register"
+      initialRouteName="Welcome"
       screenOptions={{ headerShown: false, navigationBarColor: colors.background }}
     >
-      <Stack.Screen name="Login" component={Screens.LoginScreen} />
-      <Stack.Screen name="Register" component={Screens.RegisterScreen} />
       <Stack.Screen name="Welcome" component={Screens.WelcomeScreen} />
+      <Stack.Screen name="Register" component={Screens.RegisterScreen} />
+      <Stack.Screen name="Login" component={Screens.LoginScreen} />
+      {/* Navigators */}
+      <Stack.Screen name="Main" component={MainNavigator} />
       {/** 🔥 Your screens go here */}
-      {/* IGNITE_GENERATOR_ANCHOR_APP_STACK_SCREENS */}
+			{/* IGNITE_GENERATOR_ANCHOR_APP_STACK_SCREENS */}
     </Stack.Navigator>
   )
 })

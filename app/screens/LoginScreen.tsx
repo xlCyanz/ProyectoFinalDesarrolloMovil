@@ -48,7 +48,6 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen({
       <Text testID="login-heading" tx="loginScreen.signIn" preset="heading" style={$signIn} />
       <Text tx="loginScreen.enterDetails" preset="subheading" style={$enterDetails} />
       <FormProvider {...methods}>
-
         <ControllerTextInput
           name="dni"
           inputMode="numeric"

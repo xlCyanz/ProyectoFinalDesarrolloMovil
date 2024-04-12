@@ -19,6 +19,7 @@ import Config from "../config"
 import { navigationRef, useBackButtonHandler } from "./navigationUtilities"
 import { colors } from "app/theme"
 import { MainNavigator, MainTabParamList } from "./MainNavigator"
+import { translate } from "app/i18n"
 
 /**
  * This type allows TypeScript to know what routes are defined in this navigator
@@ -39,6 +40,7 @@ export type AppStackParamList = {
   Register: undefined
   Main: NavigatorScreenParams<MainTabParamList>
   // 🔥 Your screens go here
+  History: undefined
 	// IGNITE_GENERATOR_ANCHOR_APP_STACK_PARAM_LIST
 }
 
@@ -65,9 +67,9 @@ const AppStack = observer(function AppStack() {
       <Stack.Screen name="Welcome" component={Screens.WelcomeScreen} />
       <Stack.Screen name="Register" component={Screens.RegisterScreen} />
       <Stack.Screen name="Login" component={Screens.LoginScreen} />
+      <Stack.Screen name="History" options={{ headerShown: true, headerTitle: translate("historyScreen.tabBarTitle") }} component={Screens.HistoryScreen} />
       {/* Navigators */}
       <Stack.Screen name="Main" component={MainNavigator} />
-      {/** 🔥 Your screens go here */}
 			{/* IGNITE_GENERATOR_ANCHOR_APP_STACK_SCREENS */}
     </Stack.Navigator>
   )

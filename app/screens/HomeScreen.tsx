@@ -1,30 +1,31 @@
 import React, { FC, useEffect, useRef, useState } from "react"
-import { Image, ImageStyle, View, ViewStyle } from "react-native"
+import { Image, ImageStyle, TextStyle, View, ViewStyle } from "react-native"
+import { observer } from "mobx-react-lite"
 import { Drawer } from "react-native-drawer-layout"
+import Onboarding from 'react-native-onboarding-swiper';
 import { type ContentStyle } from "@shopify/flash-list"
 
 import { colors, spacing } from "../theme"
-import { useSafeAreaInsetsStyle } from "../utils/useSafeAreaInsetsStyle"
 import { MainTabScreenProps } from "app/navigators"
+import { useSafeAreaInsetsStyle } from "../utils/useSafeAreaInsetsStyle"
 import { DrawerIconButton, ListItem, ListView, ListViewRef, Screen, Text } from "../components"
-import { observer } from "mobx-react-lite"
 
 const logo = require("../../assets/images/logo.png")
 
 interface DemoListItem {
   onPress?: (screenName: string) => void;
-  item: { name: string; useCases: string[] }
+  item: { name: string; cases: { label: string, name: string }[] }
 }
 
 const ShowroomListItem: FC<DemoListItem> = ({ item, onPress }) => (
   <View>
     <Text preset="bold" style={$menuContainer}>{item.name}</Text>
-    {item.useCases.map((u, index) => (
+    {item.cases.map((c, index) => (
       <ListItem
-        key={`section${index}-${u}`}
-        onPress={() => onPress?.(u)}
-        text={u}
+        text={c.label}
         rightIcon="caretRight"
+        key={`section${index}-${c.name}`}
+        onPress={() => onPress?.(c.name)}
       />
     ))}
   </View>
@@ -32,8 +33,70 @@ const ShowroomListItem: FC<DemoListItem> = ({ item, onPress }) => (
 
 interface HomeScreenProps extends MainTabScreenProps<"Home"> { }
 
-export const HomeScreen: FC<HomeScreenProps> = observer(function HomeScreen() {
+interface CustomPage {
+  title: string;
+  image: any,
+  subtitle: string;
+}
+
+const pages: CustomPage[] = [
+  {
+    image: require("../../assets/images/onboarding-actions.png"),
+    title: "Acciones importantes",
+    subtitle: "En la defensa civil hay varias acciones o tareas importantes que se llevan a cabo.",
+  },
+  {
+    image: require("../../assets/images/evacuation.webp"),
+    title: "Evacuación",
+    subtitle: "Es la acción de trasladar a las personas de un lugar de riesgo a uno seguro durante una emergencia, como un terremoto, incendio o inundación, con el objetivo de preservar vidas y minimizar daños.",
+  },
+  {
+    image: require("../../assets/images/onboarding-actions.png"),
+    title: "Habilitación y organización de refugios",
+    subtitle: "Implica la preparación de espacios seguros para albergar a las personas evacuadas durante una emergencia, proporcionando condiciones básicas de seguridad, alimentación, atención médica y apoyo psicológico temporal.",
+  },
+  {
+    image: require("../../assets/images/onboarding-actions.png"),
+    title: "Salvamento",
+    subtitle: "Consiste en el rescate y la asistencia a personas atrapadas, heridas o en peligro durante una emergencia, utilizando técnicas y equipos especializados para garantizar su supervivencia y bienestar.",
+  },
+  {
+    image: require("../../assets/images/extintor.webp"),
+    title: "Lucha contra incendios",
+    subtitle: "Consiste en el rescate y la asistencia a personas atrapadas, heridas o en peligro durante una emergencia, utilizando técnicas y equipos especializados para garantizar su supervivencia y bienestar.",
+  },
+];
+
+const screens = [
+  {
+    label: "Historia", name: "History"
+  },
+  {
+    label: "Servicios", name: "Service"
+  },
+  {
+    label: "Noticias", name: "News"
+  },
+  {
+    label: "Videos", name: "Videos"
+  },
+  {
+    label: "Albergues", name: "Albergues"
+  },
+  {
+    label: "Mapas de Albergues", name: "Mapas de Albergues"
+  },
+  {
+    label: "Medidas Preventivas", name: "Medidas Preventivas"
+  },
+  {
+    label: "Miembros", name: "Miembros"
+  },
+]
+
+export const HomeScreen: FC<HomeScreenProps> = observer(function HomeScreen({ navigation }) {
   const timeout = useRef<ReturnType<typeof setTimeout>>()
+  const onboardingRef = useRef<Onboarding>(null);
   const menuRef = useRef<ListViewRef<DemoListItem["item"]>>(null)
 
   const [open, setOpen] = useState(false)
@@ -70,7 +133,7 @@ export const HomeScreen: FC<HomeScreenProps> = observer(function HomeScreen() {
             estimatedItemSize={250}
             data={[{
               name: "Menu",
-              useCases: ["Historia", "Servicios", "Noticias", "Videos", "Albergues", "Mapas de Albergues", "Medidas Preventivas", "Miembros"]
+              cases: screens
             }]}
             keyExtractor={(item) => item.name}
             renderItem={({ item, index: sectionIndex }) => (
@@ -78,8 +141,8 @@ export const HomeScreen: FC<HomeScreenProps> = observer(function HomeScreen() {
                 item,
                 sectionIndex,
                 onPress: (screenName) => {
+                  navigation.navigate(screenName as never)
                   toggleDrawer();
-                  console.log("DrawerPress", screenName)
                 }
               }} />
             )}
@@ -89,10 +152,24 @@ export const HomeScreen: FC<HomeScreenProps> = observer(function HomeScreen() {
     >
       <Screen preset="fixed" safeAreaEdges={["top"]} contentContainerStyle={$screenContentContainer}>
         <DrawerIconButton onPress={toggleDrawer} />
-        <View style={$heading}>
-          <Text preset="heading" tx="demoShowroomScreen.jumpStart" />
-        </View>
-        <Text>Dale</Text>
+        <Onboarding
+          ref={onboardingRef}
+          showSkip={false}
+          showPagination={pages.length >= 2}
+          showDone={false}
+          skipLabel={<Text>Saltar</Text>}
+          nextLabel={<Text>Siguiente</Text>}
+          containerStyles={$boardingContainer}
+          imageContainerStyles={$imageContainerStyles}
+          pages={
+            pages.map((customPage) => ({
+              backgroundColor: "transparent",
+              image: <Image style={$onboardingPageImage} source={customPage.image} />,
+              title: <Text preset="subheading" style={$onboardingPageTitle} size="xl">{customPage.title}</Text>,
+              subtitle: <Text style={$onboardingPageSubtitle}>{customPage.subtitle}</Text>,
+            }))
+          }
+        />
       </Screen>
     </Drawer>
   )
@@ -100,7 +177,12 @@ export const HomeScreen: FC<HomeScreenProps> = observer(function HomeScreen() {
 
 const $screenContentContainer: ViewStyle = {
   flex: 1,
-  // paddingVertical: spacing.xxl,
+}
+
+const $boardingContainer: ViewStyle = {
+  flex: 1,
+  paddingTop: spacing.xxl,
+  justifyContent: "flex-start",
   paddingHorizontal: spacing.lg,
 }
 
@@ -130,6 +212,21 @@ const $menuContainer: ViewStyle = {
   paddingTop: spacing.lg,
 }
 
-const $heading: ViewStyle = {
-  marginBottom: spacing.xxxl,
+const $onboardingPageTitle: TextStyle = {
+  textAlign: "center",
+  marginBottom: spacing.xl,
+}
+
+const $onboardingPageSubtitle: TextStyle = {
+  textAlign: "justify",
+}
+
+const $onboardingPageImage: ImageStyle = {
+  width: 200,
+  height: 200,
+  objectFit: "cover",
+}
+
+const $imageContainerStyles: ViewStyle = {
+  paddingBottom: 50
 }

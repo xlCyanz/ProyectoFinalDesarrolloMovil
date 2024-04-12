@@ -5,7 +5,13 @@ const en = {
     },
     aboutScreen: {
       tabBarTitle: "Acerca de"
-    }
+    },
+    volunteeringScreen: {
+      tabBarTitle: "Voluntariado"
+    },
+  },
+  historyScreen: {
+    tabBarTitle: "Historia de la defensa civil"
   },
   common: {
     ok: "OK!",

@@ -18,27 +18,35 @@ export const AboutScreen: React.FC<MainTabScreenProps<"About">> = function About
         <ListItem
           LeftComponent={
             <View style={$item}>
-              <Text preset="bold">Delegado</Text>
-              <Text>Johan Ezequiel Sierra Linares</Text>
+              <Text preset="bold">Nombre de la aplicación</Text>
+              <Text>{Application.applicationName}</Text>
             </View>
           }
         />
         <ListItem
+          LeftComponent={
+            <View style={$item}>
+              <Text preset="bold">Version de la aplicación</Text>
+              <Text>{Application.nativeApplicationVersion}</Text>
+            </View>
+          }
+        />
+        <ListItem
+          LeftComponent={
+            <View style={$item}>
+              <Text preset="bold">Desarrollador</Text>
+              <Text>Johan Ezequiel Sierra Linares (2020-9997)</Text>
+            </View>
+          }
+        />
+        {/* <ListItem
           LeftComponent={
             <View style={$item}>
               <Text preset="bold">Matricula del delegado</Text>
               <Text>2020-9997</Text>
             </View>
           }
-        />
-        <ListItem
-          LeftComponent={
-            <View style={$item}>
-              <Text preset="bold">Nombre de la aplicación</Text>
-              <Text>{Application.applicationName}</Text>
-            </View>
-          }
-        />
+        /> */}
       </View>
       <View style={$buttonContainer}>
         {/* <Button style={$button} tx="common.logOut" onPress={logout} /> */}
@@ -68,7 +76,6 @@ const $buttonContainer: ViewStyle = {
 const $item: ViewStyle = {
   marginBottom: spacing.md,
 }
-
 
 // const $itemThumbnail: ImageStyle = {
 //   width: 150,

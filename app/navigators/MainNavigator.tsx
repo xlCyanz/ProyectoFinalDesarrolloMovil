@@ -13,7 +13,7 @@ import { AppStackParamList, AppStackScreenProps } from "./AppNavigator"
 export type MainTabParamList = {
   Home: undefined
   About: undefined
-  Volunteer: undefined
+  Volunteering: undefined
 }
 
 /**
@@ -62,6 +62,16 @@ export function MainNavigator(): JSX.Element {
         }}
       />
       <Tab.Screen
+        name="Volunteering"
+        component={Screens.VolunteeringScreen}
+        options={{
+          tabBarLabel: translate("MainNavigator.volunteeringScreen.tabBarTitle"),
+          tabBarIcon: ({ focused }) => (
+            <Icon icon="user-heart" color={focused ? colors.tint : undefined} size={30} />
+          ),
+        }}
+      />
+      <Tab.Screen
         name="About"
         component={Screens.AboutScreen}
         options={{
@@ -71,60 +81,6 @@ export function MainNavigator(): JSX.Element {
           ),
         }}
       />
-      {/* <Tab.Screen
-        name=""
-        component={Screens.WelcomeScreen}
-        options={{
-          tabBarLabel: "Inicio",
-          tabBarIcon: ({ focused }) => (
-            <Icon icon="view" color={focused ? colors.tint : undefined} size={30} />
-          ),
-        }}
-      /> */}
-      {/* <Tab.Screen
-        name="MainFormScreen"
-        component={MainFormScreen}
-        options={{
-          tabBarLabel: translate("MainNavigator.MainFormScreen.title"),
-          tabBarIcon: ({ focused }) => (
-            <Icon icon="calendar-plus" color={focused ? colors.tint : undefined} size={30} />
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="AboutScreen"
-        component={AboutScreen}
-        options={{
-          tabBarLabel: translate("MainNavigator.aboutScreen.tab"),
-          tabBarIcon: ({ focused }) => (
-            <Icon icon="user" color={focused ? colors.tint : undefined} size={30} />
-          ),
-        }}
-      /> */}
-
-      {/* <Tab.Screen
-        name="DemoCommunity"
-        component={DemoCommunityScreen}
-        options={{
-          tabBarLabel: translate("MainNavigator.communityTab"),
-          tabBarIcon: ({ focused }) => (
-            <Icon icon="community" color={focused ? colors.tint : undefined} size={30} />
-          ),
-        }}
-      /> */}
-
-      {/* <Tab.Screen
-        name="DemoPodcastList"
-        component={MainListScreen}
-        options={{
-          tabBarAccessibilityLabel: translate("MainNavigator.podcastListTab"),
-          tabBarLabel: translate("MainNavigator.podcastListTab"),
-          tabBarIcon: ({ focused }) => (
-            <Icon icon="podcast" color={focused ? colors.tint : undefined} size={30} />
-          ),
-        }}
-      />
-    */}
     </Tab.Navigator>
   )
 }

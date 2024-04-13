@@ -1,3 +1,5 @@
+import { ApiResponse } from "apisauce"
+
 /**
  * These types indicate the shape of the data you expect to receive from your
  * API endpoint, assuming it's a JSON object like we have.
@@ -32,6 +34,21 @@ export interface ApiFeedResponse {
     image: string
   }
   items: EpisodeItem[]
+}
+
+export type ApiResponseValues<T = never> = ApiResponse<{
+  data: T[];
+  exito: boolean;
+  mensaje: string;
+}>
+
+export interface IVolunteer {
+  dni: string;
+  email: string;
+  password: string;
+  last_name: string;
+  first_name: string;
+  phone_number: string;
 }
 
 /**

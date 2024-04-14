@@ -13,7 +13,10 @@ import Config from "../../config"
 import type {
   ApiConfig,
   ApiResponseValues,
+  IService,
   IVolunteer,
+  INotice,
+  IVideo,
 } from "./api.types"
 import { GeneralApiProblem } from "./apiProblem"
 
@@ -74,7 +77,26 @@ export class Api {
 
     return { token: "", success: data?.exito ?? false }
   }
+
+  async getNotices(): Promise<{success: boolean, data: INotice [] }> {
+    const { data }: ApiResponseValues = await this.postsauce.get("noticias.php");
+
+    return { success: data?.exito ?? false, data: data?.data ?? [] }
+  }
+
+  async getServices(): Promise<{success: boolean, data: IService [] }> {
+    const { data }: ApiResponseValues = await this.postsauce.get("servicios.php");
+
+    return { success: data?.exito ?? false, data: data?.data ?? [] }
 }
 
+async getVideos(): Promise<{success: boolean, data: IVideo [] }> {
+  const { data }: ApiResponseValues = await this.postsauce.get("videos.php");
+
+  return { success: data?.exito ?? false, data: data?.data ?? [] }
+
+ }
+
+  }
 // Singleton instance of the API for convenience
 export const api = new Api()

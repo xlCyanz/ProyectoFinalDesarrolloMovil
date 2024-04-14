@@ -51,6 +51,57 @@ export interface IVolunteer {
   phone_number: string;
 }
 
+// Definiendo la respuesta esperada para el método getNotices.
+
+
+export interface INotice {
+  id: number;
+  fecha: string;
+  titulo: string;
+  contenido: string;
+  foto: string;
+}
+
+export interface getNotices{
+  kind: "ok";
+  datos: INotice[];
+  exito: boolean;
+  mensaje: string;
+}
+
+// services/api/api.types.ts
+export type IService = {
+  id: number;
+  nombre: string;
+  descripcion: string;
+  foto: string;
+};
+
+// Exporta cualquier otro tipo que ya tengas aquí
+
+
+export interface getServices{
+  kind: "ok";
+  datos: INotice[];
+  exito: boolean;
+  mensaje: string;
+}
+
+export type IVideo = {
+  id: number;
+  fecha: string;
+  titulo: string;
+  descripcion: string;
+  link: string;
+};
+
+export interface getVideos{
+  kind: "ok";
+  datos: IVideo[];
+  exito: boolean;
+  mensaje: string;
+}
+
 /**
  * The options used to configure apisauce.
  */

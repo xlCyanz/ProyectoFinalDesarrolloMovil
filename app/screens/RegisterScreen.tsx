@@ -1,7 +1,7 @@
 import { observer } from "mobx-react-lite"
-import { ActivityIndicator, Alert, TextStyle, ViewStyle } from "react-native"
 import { FormProvider, useForm } from "react-hook-form"
 import React, { ComponentType, FC, useMemo, useState } from "react"
+import { ActivityIndicator, Alert, ImageStyle, TextStyle, ViewStyle } from "react-native"
 import { Button, ControllerTextInput, Icon, Screen, Text, TextFieldAccessoryProps } from "../components"
 
 import { useStores } from "../models"
@@ -13,7 +13,7 @@ interface RegisterScreenProps extends AppStackScreenProps<"Register"> { }
 
 export const RegisterScreen: FC<RegisterScreenProps> = observer(function RegisterScreen({ navigation }) {
   const {
-    authenticationStore: { register },
+    volunteerStore: { register },
   } = useStores()
 
   const methods = useForm<IVolunteer>();
@@ -39,9 +39,12 @@ export const RegisterScreen: FC<RegisterScreenProps> = observer(function Registe
   return (
     <Screen
       preset="auto"
+      safeAreaEdges={["bottom"]}
       contentContainerStyle={$screenContentContainer}
-      safeAreaEdges={["top", "bottom"]}
     >
+      {navigation.canGoBack() ? (
+        <Icon icon="back" size={30} style={$backIcon} onPress={navigation.goBack} />
+      ) : null}
       <Text testID="register-heading" tx="registerScreen.registerVolunteer" preset="heading" style={$register} />
       <Text tx="registerScreen.enterDetails" preset="subheading" style={$enterDetails} />
       <FormProvider {...methods}>
@@ -108,7 +111,7 @@ export const RegisterScreen: FC<RegisterScreenProps> = observer(function Registe
               if (isRegistered) {
                 Alert.alert("Registrado con éxito", "Seras enviado a iniciar sesión", [{
                   text: "Ir", onPress: () => {
-                    navigation.navigate("Login")
+                    navigation.goBack();
                   }
                 }])
               } else {
@@ -141,4 +144,8 @@ const $textField: ViewStyle = {
 
 const $tapButton: ViewStyle = {
   marginTop: spacing.xs,
+}
+
+const $backIcon: ImageStyle = {
+  marginVertical: spacing.md
 }

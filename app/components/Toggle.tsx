@@ -23,7 +23,6 @@ import Animated, {
 import { colors, spacing } from "../theme"
 import { iconRegistry, IconTypes } from "./Icon"
 import { Text, TextProps } from "./Text"
-import { isRTL } from "app/i18n"
 
 type Variants = "checkbox" | "switch" | "radio"
 
@@ -460,8 +459,8 @@ function Switch(props: ToggleInputProps) {
     // For RTL support:
     // - web flip input range to [1,0]
     // - outputRange doesn't want rtlAdjustment
-    const rtlAdjustment = isRTL ? -1 : 1
-    const inputRange = Platform.OS === "web" ? (isRTL ? [1, 0] : [0, 1]) : [0, 1]
+    const rtlAdjustment = 1
+    const inputRange = Platform.OS === "web" ? ([0, 1]) : [0, 1]
     const outputRange =
       Platform.OS === "web"
         ? [offsetLeft, +(knobWidth || 0) + offsetRight]

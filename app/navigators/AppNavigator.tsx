@@ -4,6 +4,9 @@
  * Generally speaking, it will contain an auth flow (registration, login, forgot password)
  * and a "main" flow which the user will use once logged in.
  */
+import React from "react"
+import { observer } from "mobx-react-lite"
+import { useColorScheme } from "react-native"
 import {
   DarkTheme,
   DefaultTheme,
@@ -11,15 +14,12 @@ import {
   NavigatorScreenParams,
 } from "@react-navigation/native"
 import { createNativeStackNavigator, NativeStackScreenProps } from "@react-navigation/native-stack"
-import { observer } from "mobx-react-lite"
-import React from "react"
-import { useColorScheme } from "react-native"
+
+import { colors } from "app/theme"
 import * as Screens from "app/screens"
 import Config from "../config"
 import { navigationRef, useBackButtonHandler } from "./navigationUtilities"
-import { colors } from "app/theme"
 import { MainNavigator, MainTabParamList } from "./MainNavigator"
-import { translate } from "app/i18n"
 
 /**
  * This type allows TypeScript to know what routes are defined in this navigator
@@ -35,9 +35,14 @@ import { translate } from "app/i18n"
  *   https://reactnavigation.org/docs/typescript/#organizing-types
  */
 export type AppStackParamList = {
-  Welcome: undefined
-  Login: undefined
-  Register: undefined
+  News: undefined;
+  NewsDetails: { id: string };
+  Welcome: undefined;
+  Register: undefined;
+  Members: undefined;
+  Hostels: undefined;
+  HostelsMap: undefined;
+  HostelDetails: { code: string };
   Main: NavigatorScreenParams<MainTabParamList>
   // 🔥 Your screens go here
   History: undefined
@@ -66,8 +71,13 @@ const AppStack = observer(function AppStack() {
     >
       <Stack.Screen name="Welcome" component={Screens.WelcomeScreen} />
       <Stack.Screen name="Register" component={Screens.RegisterScreen} />
-      <Stack.Screen name="Login" component={Screens.LoginScreen} />
-      <Stack.Screen name="History" options={{ headerShown: true, headerTitle: translate("historyScreen.tabBarTitle") }} component={Screens.HistoryScreen} />
+      <Stack.Screen name="History" component={Screens.HistoryScreen} />
+      <Stack.Screen name="Members" component={Screens.MembersScreen} />
+      <Stack.Screen name="Hostels" component={Screens.HostelsScreen} />
+      <Stack.Screen name="HostelDetails" component={Screens.HostelDetailsScreen} />
+      <Stack.Screen name="HostelsMap" component={Screens.HostelsMapScreen} />
+      <Stack.Screen name="News" component={Screens.NewsScreen} />
+      <Stack.Screen name="NewsDetails" component={Screens.NewsDetailsScreen} />
       {/* Navigators */}
       <Stack.Screen name="Main" component={MainNavigator} />
 			{/* IGNITE_GENERATOR_ANCHOR_APP_STACK_SCREENS */}

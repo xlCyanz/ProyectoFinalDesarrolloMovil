@@ -7,7 +7,52 @@ const en = {
       tabBarTitle: "Acerca de"
     },
     volunteeringScreen: {
-      tabBarTitle: "Voluntariado"
+      tabBarTitle: "Voluntariado",
+      welcomeVolunteers: "Bienvenidos voluntarios",
+      newsListTitle: "Lista de noticias relevantes",
+      emptyStateTitle: "No hay noticias relevantes disponibles.",
+      emptyStateSubtitle: "Toca en intentar de nuevo para refrescar",
+    },
+    newsScreen: {
+      title: "Noticias",
+      newsListTitle: "Lista de noticias",
+      emptyStateTitle: "No hay noticias disponibles.",
+    },
+    membersScreen: {
+      title: "Miembros de la defensa civil",
+      emptyStateTitle: "No hay miembros disponibles.",
+      emptyStateSubtitle: "Toca en intentar de nuevo para refrescar",
+    },
+    hostelsScreen: {
+      title: "Albergues disponibles",
+      emptyStateTitle: "No hay albergues disponibles.",
+      emptyStateSubtitle: "Toca en intentar de nuevo para refrescar",
+    },
+    signInScreen: {
+      tabBarTitle: "Iniciar Sesión",
+      enterDetails:
+        "Ingrese su información a continuación para acceder a la información de los voluntarios.",
+      tapToSignIn: "Toca para ingresar",
+      signUpText: "¿No te has registrado?",
+      tapToSignUp: "Ir a registrarse",
+      inputs: {
+        dniFieldLabel: "Cédula",
+        dniFieldPlaceholder: "000-0000000-0",
+        passwordFieldLabel: "Contraseña",
+        passwordFieldPlaceholder: "Ingresa tu super contraseña secreta",
+      },
+    },
+    changePasswordScreen: {
+      tabBarTitle: "Cambiar contraseña",
+      subtitle:
+        "Ingrese la antigua y nueva contraseña para actualizar.",
+      tapToChange: "Toca para cambiar",
+      inputs: {
+        oldPasswordFieldLabel: "Antigua contraseña",
+        oldPasswordFieldPlaceholder: "Ingresa tu antigua contraseña secreta",
+        newPasswordFieldLabel: "Nueva contraseña",
+        newPasswordFieldPlaceholder: "Ingresa tu super nueva contraseña secreta",
+      },
     },
   },
   historyScreen: {
@@ -17,6 +62,8 @@ const en = {
     ok: "OK!",
     cancel: "Cancel",
     back: "Back",
+    emptyStateTryTap: "Intentar de nuevo",
+    emptyStateTryAgain: "Toca en intentar de nuevo para refrescar",
   },
   welcomeScreen: {
     title: "Proyecto Final de Intr. Desarrollo Movil",
@@ -34,18 +81,6 @@ const en = {
       heading: "So empty... so sad",
       content: "No data found yet. Try clicking the button to refresh or reload the app.",
       button: "Let's try this again",
-    },
-  },
-  loginScreen: {
-    signIn: "Iniciar Sesión",
-    enterDetails:
-      "Ingrese su información a continuación para acceder a la información de los voluntarios.",
-    tapToSignIn: "Toca para ingresar",
-    inputs: {
-      dniFieldLabel: "Cédula",
-      dniFieldPlaceholder: "000-0000000-0",
-      passwordFieldLabel: "Contraseña",
-      passwordFieldPlaceholder: "Ingresa tu super contraseña secreta",
     },
   },
   registerScreen: {

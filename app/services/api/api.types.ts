@@ -4,40 +4,10 @@ import { ApiResponse } from "apisauce"
  * These types indicate the shape of the data you expect to receive from your
  * API endpoint, assuming it's a JSON object like we have.
  */
-export interface EpisodeItem {
-  title: string
-  pubDate: string
-  link: string
-  guid: string
-  author: string
-  thumbnail: string
-  description: string
-  content: string
-  enclosure: {
-    link: string
-    type: string
-    length: number
-    duration: number
-    rating: { scheme: string; value: string }
-  }
-  categories: string[]
-}
-
-export interface ApiFeedResponse {
-  status: string
-  feed: {
-    url: string
-    title: string
-    link: string
-    author: string
-    description: string
-    image: string
-  }
-  items: EpisodeItem[]
-}
 
 export type ApiResponseValues<T = never> = ApiResponse<{
-  data: T[];
+  data: T;
+  datos: T;
   exito: boolean;
   mensaje: string;
 }>
@@ -46,9 +16,43 @@ export interface IVolunteer {
   dni: string;
   email: string;
   password: string;
-  last_name: string;
-  first_name: string;
-  phone_number: string;
+  lastName: string;
+  firstName: string;
+  phoneNumber: string;
+}
+
+export interface IVolunteerNews {
+  id: string;
+  foto: string;
+  fecha: string;
+  titulo: string;
+  contenido: string;
+}
+
+export interface IMember {
+  id: string;
+  foto: string;
+  nombre: string;
+  cargo: string;
+}
+
+export interface IHostel {
+  lat: string;
+  lng: string;
+  ciudad: string;
+  codigo: string;
+  edificio: string;
+  telefono: string;
+  capacidad: string;
+  coordinador: string;
+}
+
+export interface INews {
+  id: string;
+  foto: string;
+  fecha: string;
+  titulo: string;
+  contenido: string;
 }
 
 /**

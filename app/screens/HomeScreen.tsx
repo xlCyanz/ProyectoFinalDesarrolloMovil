@@ -81,16 +81,16 @@ const screens = [
     label: "Videos", name: "Videos"
   },
   {
-    label: "Albergues", name: "Albergues"
+    label: "Albergues", name: "Hostels"
   },
   {
-    label: "Mapas de Albergues", name: "Mapas de Albergues"
+    label: "Mapas de Albergues", name: "HostelsMap"
   },
   {
     label: "Medidas Preventivas", name: "Medidas Preventivas"
   },
   {
-    label: "Miembros", name: "Miembros"
+    label: "Miembros", name: "Members"
   },
 ]
 

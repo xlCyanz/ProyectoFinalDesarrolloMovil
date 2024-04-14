@@ -1,6 +1,6 @@
 import React from "react"
 import { TextStyle, ViewStyle } from "react-native"
-import { CompositeScreenProps } from "@react-navigation/native"
+import { CompositeScreenProps, NavigatorScreenParams } from "@react-navigation/native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 import { BottomTabScreenProps, createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 
@@ -9,11 +9,12 @@ import { translate } from "../i18n"
 import * as Screens from "app/screens"
 import { colors, spacing, typography } from "../theme"
 import { AppStackParamList, AppStackScreenProps } from "./AppNavigator"
+import { VolunteeringNavigator, VolunteeringStackParamList } from "./VolunteeringNavigator"
 
 export type MainTabParamList = {
   Home: undefined
   About: undefined
-  Volunteering: undefined
+  VolunteeringStack: NavigatorScreenParams<VolunteeringStackParamList>
 }
 
 /**
@@ -36,7 +37,7 @@ const Tab = createBottomTabNavigator<MainTabParamList>()
  * @returns {JSX.Element} The rendered `MainNavigator`.
  */
 export function MainNavigator(): JSX.Element {
-  const { bottom } = useSafeAreaInsets()
+  const { bottom } = useSafeAreaInsets();
 
   return (
     <Tab.Navigator
@@ -62,8 +63,8 @@ export function MainNavigator(): JSX.Element {
         }}
       />
       <Tab.Screen
-        name="Volunteering"
-        component={Screens.VolunteeringScreen}
+        name="VolunteeringStack"
+        component={VolunteeringNavigator}
         options={{
           tabBarLabel: translate("MainNavigator.volunteeringScreen.tabBarTitle"),
           tabBarIcon: ({ focused }) => (

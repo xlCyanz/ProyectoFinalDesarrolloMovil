@@ -1,15 +1,20 @@
 import React, { FC } from "react"
 import { observer } from "mobx-react-lite"
-import { TextStyle, ViewStyle } from "react-native"
-import { AppStackScreenProps } from "app/navigators"
-import { Screen, Text } from "app/components"
+import { ImageStyle, TextStyle, ViewStyle } from "react-native"
+
 import { spacing } from "app/theme"
+import { AppStackScreenProps } from "app/navigators"
+import { Icon, Screen, Text } from "app/components"
 
 interface HistoryScreenProps extends AppStackScreenProps<"History"> { }
 
-export const HistoryScreen: FC<HistoryScreenProps> = observer(function HistoryScreen() {
+export const HistoryScreen: FC<HistoryScreenProps> = observer(function HistoryScreen({ navigation }) {
   return (
-    <Screen preset="scroll" contentContainerStyle={$container}>
+    <Screen safeAreaEdges={["bottom"]} preset="scroll" contentContainerStyle={$container}>
+      {navigation.canGoBack() ? (
+        <Icon icon="back" size={30} style={$backIcon} onPress={navigation.goBack} />
+      ) : null}
+      <Text testID="register-heading" tx="historyScreen.tabBarTitle" preset="heading" style={$heading} />
       <Text style={$text}>
         Antes del año 1966, cuando llegaba la temporada de huracanes, un grupo de radioaficionados
         se reunía en la Cruz Roja para estar atentos por si surgía algún tipo de emergencia,
@@ -48,3 +53,11 @@ const $text: TextStyle = {
   textAlign: "justify",
   marginBottom: 20
 };
+
+const $heading: TextStyle = {
+  marginBottom: 10
+};
+
+const $backIcon: ImageStyle = {
+  marginVertical: spacing.md
+}

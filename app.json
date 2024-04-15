@@ -32,6 +32,11 @@
         "foregroundImage": "./assets/images/app-icon-android-adaptive-foreground.png",
         "backgroundImage": "./assets/images/app-icon-android-adaptive-background.png"
       },
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyBEKISHzYWLjSHTEhHRcYnAnAkWR6U-mcM"
+        }
+      },
       "splash": {
         "image": "./assets/images/splash-logo-android-universal.png",
         "resizeMode": "contain",

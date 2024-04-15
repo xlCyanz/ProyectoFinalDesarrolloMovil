@@ -5,7 +5,7 @@ import { observer } from "mobx-react-lite"
 import { spacing } from "../theme"
 import { Icon, Screen, Text, } from "../components"
 import { AppStackScreenProps } from "../navigators"
-import MapView, { Marker } from "react-native-maps"
+import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps"
 import { useStores } from "../models"
 import { useFocusEffect } from "@react-navigation/native"
 
@@ -29,6 +29,7 @@ export const HostelsMapScreen: FC<HostelsMapScreenProps> = observer(function Hos
         <Text text="Mapa de albergues" preset="heading" />
       </View>
       <MapView
+        provider={PROVIDER_GOOGLE}
         initialRegion={{
           latitude: 18,
           longitude: -70,

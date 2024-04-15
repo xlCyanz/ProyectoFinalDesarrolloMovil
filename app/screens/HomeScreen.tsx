@@ -72,7 +72,7 @@ const screens = [
     label: "Historia", name: "History"
   },
   {
-    label: "Servicios", name: "Service"
+    label: "Servicios", name: "Services"
   },
   {
     label: "Noticias", name: "News"
@@ -87,7 +87,7 @@ const screens = [
     label: "Mapas de Albergues", name: "HostelsMap"
   },
   {
-    label: "Medidas Preventivas", name: "Medidas Preventivas"
+    label: "Medidas Preventivas", name: "Measures"
   },
   {
     label: "Miembros", name: "Members"

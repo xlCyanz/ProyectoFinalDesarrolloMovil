@@ -46,7 +46,7 @@ export const HistoryScreen: FC<HistoryScreenProps> = observer(function HistorySc
 
 const $container: ViewStyle = {
   paddingVertical: spacing.xl,
-  paddingHorizontal: spacing.lg,
+  paddingHorizontal: spacing.md,
 }
 
 const $text: TextStyle = {

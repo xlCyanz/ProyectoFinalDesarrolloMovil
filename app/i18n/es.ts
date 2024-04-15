@@ -1,10 +1,37 @@
 const en = {
+  VolunteeringNavigator: {
+    reportSituationScreen: {
+      tabBarTitle: "Reportar situación",
+      enterDetails:
+        "Participa en la comunidad con tu reporte de emergencias a tiempo.",
+      tapToSignIn: "Toca para reportar",
+      inputs: {
+        titleFieldLabel: "Titulo",
+        titleFieldPlaceholder: "Escribe un titulo",
+        descriptionFieldLabel: "Descripción",
+        descriptionFieldPlaceholder: "Escribe una descripción",
+        photoFieldLabel: "Descripción",
+        photoFieldPlaceholder: "Escribe una descripción",
+        latitudeFieldLabel: "Latitud",
+        latitudeFieldPlaceholder: "Ingresa una latitud",
+        longitudeFieldLabel: "Longitud",
+        longitudeFieldPlaceholder: "Ingresa una longitud",
+      },
+    },
+    situationsScreen: {
+      title: "Mis situaciones",
+      emptyStateTitle: "No hay situaciones reportadas.",
+    },
+  },
   MainNavigator: {
     homeScreen: {
       tabBarTitle: "Inicio"
     },
     aboutScreen: {
       tabBarTitle: "Acerca de"
+    },
+    videosScreen: {
+      title: "Videos educativos"
     },
     volunteeringScreen: {
       tabBarTitle: "Voluntariado",
@@ -21,12 +48,18 @@ const en = {
     membersScreen: {
       title: "Miembros de la defensa civil",
       emptyStateTitle: "No hay miembros disponibles.",
-      emptyStateSubtitle: "Toca en intentar de nuevo para refrescar",
     },
     hostelsScreen: {
       title: "Albergues disponibles",
       emptyStateTitle: "No hay albergues disponibles.",
-      emptyStateSubtitle: "Toca en intentar de nuevo para refrescar",
+    },
+    servicesScreen: {
+      title: "Servicios",
+      emptyStateTitle: "No hay servicios disponibles.",
+    },
+    measuresScreen: {
+      title: "Medidas preventivas",
+      emptyStateTitle: "No hay medidas preventivas disponibles.",
     },
     signInScreen: {
       tabBarTitle: "Iniciar Sesión",

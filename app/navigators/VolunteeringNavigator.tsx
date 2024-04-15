@@ -11,7 +11,11 @@ export type VolunteeringStackParamList = {
   SignIn: undefined
   Volunteering: undefined
   ChangePassword: undefined
+  ReportSituation: undefined
+  Situations: undefined
   VolunteeringNewsDetails: { id: string }
+  SituationDetails: { id: string }
+  SituationsMap: undefined
 }
 
 export type VolunteeringStackScreenProps<T extends keyof VolunteeringStackParamList> =
@@ -34,6 +38,10 @@ export const VolunteeringNavigator = observer(() => {
           <Stack.Screen name="Volunteering" component={Screens.VolunteeringScreen} />
           <Stack.Screen name="ChangePassword" component={Screens.ChangePasswordScreen} />
           <Stack.Screen name="VolunteeringNewsDetails" component={Screens.VolunteeringNewsDetailsScreen} />
+          <Stack.Screen name="ReportSituation" component={Screens.ReportSituationScreen} />
+          <Stack.Screen name="Situations" component={Screens.SituationsScreen} />
+          <Stack.Screen name="SituationDetails" component={Screens.SituationDetailsScreen} />
+          <Stack.Screen name="SituationsMap" component={Screens.SituationsMapScreen} />
         </>
       ) : (
         <Stack.Screen name="SignIn" component={Screens.SignInScreen} />

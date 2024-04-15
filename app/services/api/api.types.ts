@@ -55,6 +55,47 @@ export interface INews {
   contenido: string;
 }
 
+export interface IService {
+  id: string;
+  foto: string;
+  nombre: string;
+  descripcion: string;
+}
+
+export interface IVideo {
+  id: string;
+  link: string;
+  fecha: string;
+  titulo: string;
+  descripcion: string;
+}
+
+export interface ISituationIn {
+  title: string;
+  description: string;
+  photoBase64: string;
+  latitude: string;
+  longitude: string;
+}
+
+export interface ISituationOut {
+  id: string;
+  foto: string;
+  fecha: string;
+  titulo: string;
+  estado: string;
+  latitud: string;
+  longitud: string
+  descripcion: string;
+}
+
+export interface IPrecautionaryMeasures {
+  id: string;
+  foto: string;
+  titulo: string;
+  descripcion: string;
+}
+
 /**
  * The options used to configure apisauce.
  */

@@ -6,11 +6,11 @@
 
 - [x] Historia: 📚 Sección narrativa sobre la evolución y logros de la Defensa Civil.
 
-- [ ] Servicios: 🛠️ Listado de servicios ofrecidos, con datos de la API.
+- [x] Servicios: 🛠️ Listado de servicios ofrecidos, con datos de la API.
 
 - [x] Noticias: 📰 Últimas noticias relacionadas, actualizadas mediante API.
 
-- [ ] Videos: 🎥 Galería de videos educativos y formativos.
+- [x] Videos: 🎥 Galería de videos educativos y formativos.
 
 - [x] Albergues: 🏠 Lista y búsqueda de albergues, con detalles al seleccionar uno.
 

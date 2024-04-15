@@ -3,8 +3,8 @@ import { Instance, SnapshotIn, SnapshotOut, types } from "mobx-state-tree"
 export const HostelModel = types
     .model("Hostel")
     .props({
-        ciudad: types.identifier,
-        codigo: types.string,
+        ciudad: types.string,
+        codigo: types.identifier,
         edificio: types.string,
         coordinador: types.string,
         telefono: types.string,

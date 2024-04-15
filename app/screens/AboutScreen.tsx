@@ -39,6 +39,46 @@ export const AboutScreen: React.FC<MainTabScreenProps<"About">> = function About
             </View>
           }
         />
+        <ListItem
+          LeftComponent={
+            <View style={$item}>
+              <Text preset="bold">Desarrollador</Text>
+              <Text>Dervin Ransiel Mendez Jimenez (2020-10715)</Text>
+            </View>
+          }
+        />
+        <ListItem
+          LeftComponent={
+            <View style={$item}>
+              <Text preset="bold">Desarrollador</Text>
+              <Text>Jesús Ramón Ortiz Beriguete (2019-8124)</Text>
+            </View>
+          }
+        />
+        <ListItem
+          LeftComponent={
+            <View style={$item}>
+              <Text preset="bold">Desarrollador</Text>
+              <Text>Felix Ramón Duran (2019-7905)</Text>
+            </View>
+          }
+        />
+        {/* <ListItem
+          LeftComponent={
+            <View style={$item}>
+              <Text preset="bold">Desarrollador</Text>
+              <Text>Johan Ezequiel Sierra Linares (2020-9997)</Text>
+            </View>
+          }
+        />
+        <ListItem
+          LeftComponent={
+            <View style={$item}>
+              <Text preset="bold">Desarrollador</Text>
+              <Text>Johan Ezequiel Sierra Linares (2020-9997)</Text>
+            </View>
+          }
+        /> */}
         {/* <ListItem
           LeftComponent={
             <View style={$item}>

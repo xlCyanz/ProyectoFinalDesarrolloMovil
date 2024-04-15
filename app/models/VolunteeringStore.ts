@@ -1,19 +1,29 @@
 import { Instance, SnapshotOut, types } from "mobx-state-tree"
 
-import { IVolunteer, api } from "app/services/api"
+import { ISituationIn, IVolunteer, api } from "app/services/api"
 import { VolunteerNewsModel } from "./VolunteerNewsModel";
 import { withSetPropAction } from "./helpers/withSetPropAction"
+import { SituationModel } from "./SituationModel";
 
 export const VolunteeringStoreModel = types
   .model("VolunteeringStore")
   .props({
     authToken: types.maybe(types.string),
-    news: types.array(VolunteerNewsModel)
+    news: types.array(VolunteerNewsModel),
+    situations: types.array(SituationModel)
   })
   .actions(withSetPropAction)
   .actions((store) => ({
     async register(volunteer: IVolunteer) {
       return await api.registerVolunteer(volunteer);
+    },
+    async reportSituation(situation: ISituationIn) {
+      return await api.reportSituationVolunteer(store.authToken ?? "", situation);
+    },
+    async fetchSituations() {
+      const response = await api.getSituations(store.authToken ?? "")
+      if (response.success) store.setProp("situations", response.data)
+      return response;
     },
     async changePassword(oldPassword: string, newPassword: string) {
       const response = await api.changePasswordVolunteer(store.authToken ?? "", oldPassword, newPassword);
@@ -32,6 +42,9 @@ export const VolunteeringStoreModel = types
     async getOneNews(id: string) {
       return store.news.find((news) => news.id === id);
     },
+    async getOneSituation(id: string) {
+      return store.situations.find((situation) => situation.id === id);
+    },
     logout() {
       store.authToken = undefined
     },
@@ -42,6 +55,9 @@ export const VolunteeringStoreModel = types
     },
     get newsList() {
       return store.news ?? []
+    },
+    get situationsList() {
+      return store.situations ?? []
     }
   }))
 

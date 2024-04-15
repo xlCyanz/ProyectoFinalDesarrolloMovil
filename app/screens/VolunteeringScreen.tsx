@@ -16,13 +16,13 @@ interface VolunteeringScreenProps extends VolunteeringStackScreenProps<"Voluntee
 
 const screens = [
   {
-    label: "Reportar Situación", name: ""
+    label: "Reportar Situación", name: "ReportSituation"
   },
   {
-    label: "Mis Situaciones", name: ""
+    label: "Mis Situaciones", name: "Situations"
   },
   {
-    label: "Mapa de Situaciones", name: ""
+    label: "Mapa de Situaciones", name: "SituationsMap"
   },
   {
     label: "Cambiar Contraseña", name: "ChangePassword"
@@ -122,8 +122,8 @@ export const VolunteeringScreen: FC<VolunteeringScreenProps> = observer(function
               <EmptyState
                 preset="generic"
                 headingTx="MainNavigator.volunteeringScreen.emptyStateTitle"
-                contentTx="MainNavigator.volunteeringScreen.emptyStateSubtitle"
-                button="Intentar de nuevo"
+                contentTx="common.emptyStateTryAgain"
+                buttonTx="common.emptyStateTryTap"
                 buttonOnPress={manualRefresh}
                 ImageProps={{ resizeMode: "contain" }}
               />

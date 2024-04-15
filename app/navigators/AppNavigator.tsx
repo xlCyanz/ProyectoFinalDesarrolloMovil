@@ -37,16 +37,20 @@ import { MainNavigator, MainTabParamList } from "./MainNavigator"
 export type AppStackParamList = {
   News: undefined;
   NewsDetails: { id: string };
+  Videos: undefined;
   Welcome: undefined;
-  Register: undefined;
   Members: undefined;
   Hostels: undefined;
+  Services: undefined;
+  Measures: undefined;
+  MeasureDetails: { id: string };
+  Register: undefined;
   HostelsMap: undefined;
   HostelDetails: { code: string };
   Main: NavigatorScreenParams<MainTabParamList>
   // 🔥 Your screens go here
   History: undefined
-	// IGNITE_GENERATOR_ANCHOR_APP_STACK_PARAM_LIST
+  // IGNITE_GENERATOR_ANCHOR_APP_STACK_PARAM_LIST
 }
 
 /**
@@ -78,9 +82,13 @@ const AppStack = observer(function AppStack() {
       <Stack.Screen name="HostelsMap" component={Screens.HostelsMapScreen} />
       <Stack.Screen name="News" component={Screens.NewsScreen} />
       <Stack.Screen name="NewsDetails" component={Screens.NewsDetailsScreen} />
+      <Stack.Screen name="Services" component={Screens.ServicesScreen} />
+      <Stack.Screen name="Videos" component={Screens.VideosScreen} />
+      <Stack.Screen name="Measures" component={Screens.MeasuresScreen} />
+      <Stack.Screen name="MeasureDetails" component={Screens.MeasureDetailsScreen} />
       {/* Navigators */}
       <Stack.Screen name="Main" component={MainNavigator} />
-			{/* IGNITE_GENERATOR_ANCHOR_APP_STACK_SCREENS */}
+      {/* IGNITE_GENERATOR_ANCHOR_APP_STACK_SCREENS */}
     </Stack.Navigator>
   )
 })

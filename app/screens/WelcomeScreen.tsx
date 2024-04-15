@@ -7,7 +7,7 @@ import { colors, spacing } from "../theme"
 import { AppStackScreenProps } from "../navigators"
 import { useSafeAreaInsetsStyle } from "../utils/useSafeAreaInsetsStyle"
 
-const welcomeLogo = require("../../assets/images/logo.png")
+const welcomeLogo = require("../../assets/images/logo1.png")
 
 interface WelcomeScreenProps extends AppStackScreenProps<"Welcome"> { }
 
@@ -64,7 +64,7 @@ const $bottomContainer: ViewStyle = {
   backgroundColor: colors.palette.neutral100,
 }
 const $welcomeLogo: ImageStyle = {
-  height: 88,
+  height: 200,
   width: "100%",
   marginBottom: spacing.xxl,
 }

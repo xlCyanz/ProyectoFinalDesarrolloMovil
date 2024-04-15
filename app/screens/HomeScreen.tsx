@@ -10,7 +10,7 @@ import { MainTabScreenProps } from "app/navigators"
 import { useSafeAreaInsetsStyle } from "../utils/useSafeAreaInsetsStyle"
 import { DrawerIconButton, ListItem, ListView, ListViewRef, Screen, Text } from "../components"
 
-const logo = require("../../assets/images/logo.png")
+const logo = require("../../assets/images/logo1.png")
 
 interface DemoListItem {
   onPress?: (screenName: string) => void;
@@ -196,7 +196,7 @@ const $listContentContainer: ContentStyle = {
 }
 
 const $logoImage: ImageStyle = {
-  height: 42,
+  height: 77,
   width: 77,
 }
 

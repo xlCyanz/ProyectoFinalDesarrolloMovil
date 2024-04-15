@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { ActivityIndicator, ImageStyle, View, ViewStyle } from "react-native";
 
-import { useStores } from "app/models";
-import { AppStackScreenProps } from "app/navigators"
+import { useStores } from "../models";
+import { AppStackScreenProps } from "../navigators"
 import { Icon, ListItem, Screen, Text } from "../components"
 
 import { spacing } from "../theme"
-import { Hostel } from "app/models/HostelModel";
+import { Hostel } from "../models/HostelModel";
 
 export const HostelDetailsScreen: React.FC<AppStackScreenProps<"HostelDetails">> = function EventDetails(
   { navigation, route },

@@ -1,6 +1,6 @@
 import { Instance, SnapshotOut, types } from "mobx-state-tree"
 
-import { api } from "app/services/api"
+import { api } from "../services/api"
 import { withSetPropAction } from "./helpers/withSetPropAction"
 import { MeasureModel } from "./MeasureModel";
 
@@ -16,7 +16,6 @@ export const MeasureStoreModel = types
       store.setProp("measures", response.data ?? []);
     },
     async getOneMeasure(id: string) {
-      console.log(store)
       return store.measures.find((measure) => measure.id === id);
     },
   }))

@@ -1,15 +1,15 @@
 import React, { FC, useState } from "react"
 import { observer } from "mobx-react-lite"
 import { ContentStyle } from "@shopify/flash-list"
-import { ActivityIndicator, FlatList, ImageStyle, TextStyle, View, ViewStyle } from "react-native"
-
-import { spacing } from "app/theme"
-import { useStores } from "app/models"
-import { delay } from "app/utils/delay"
-import { IVolunteerNews } from "app/services/api"
-import { AppStackScreenProps } from "app/navigators"
-import { CardImage, EmptyState, Icon, Screen, Text } from "app/components"
 import { useFocusEffect } from "@react-navigation/native"
+import { ActivityIndicator, Dimensions, ImageStyle, TextStyle, View, ViewStyle } from "react-native"
+
+import { spacing } from "../theme"
+import { useStores } from "../models"
+import { delay } from "../utils/delay"
+import { IVolunteerNews } from "../services/api"
+import { AppStackScreenProps } from "../navigators"
+import { CardImage, EmptyState, Icon, ListView, Screen, Text } from "../components"
 
 interface NewsScreenProps extends AppStackScreenProps<"News"> { }
 
@@ -36,15 +36,21 @@ export const NewsScreen: FC<NewsScreenProps> = observer(function NewsScreen({ na
 
   return (
     <Screen preset="fixed" safeAreaEdges={["top"]} style={$screenContentContainer}>
-      {navigation.canGoBack() ? (
-        <Icon icon="back" size={30} style={$backIcon} onPress={navigation.goBack} />
-      ) : null}
-      <View>
-        <Text testID="login-heading" tx="MainNavigator.newsScreen.title" preset="heading" style={$signInScreen} />
-        <Text tx="MainNavigator.newsScreen.newsListTitle" preset="subheading" style={$enterDetails} />
-      </View>
-      <FlatList<IVolunteerNews>
+      <ListView<IVolunteerNews>
         contentContainerStyle={$listContentContainer}
+        ListHeaderComponent={
+          <View>
+            {navigation.canGoBack() ? (
+              <Icon icon="back" size={30} style={$backIcon} onPress={navigation.goBack} />
+            ) : null}
+            <View>
+              <Text testID="login-heading" tx="MainNavigator.newsScreen.title" preset="heading" style={$heading} />
+              <Text tx="MainNavigator.newsScreen.newsListTitle" preset="subheading" style={$subtitle} />
+            </View>
+          </View>
+        }
+        estimatedItemSize={100}
+        estimatedListSize={{ height: Dimensions.get("screen").height, width: Dimensions.get("screen").width }}
         data={newsStore.newsList.slice()}
         refreshing={refreshing}
         onRefresh={manualRefresh}
@@ -72,21 +78,21 @@ export const NewsScreen: FC<NewsScreenProps> = observer(function NewsScreen({ na
   )
 })
 
+const $screenContentContainer: ViewStyle = {
+  flex: 1,
+  flexDirection: "row",
+}
+
 const $listContentContainer: ContentStyle = {
   paddingBottom: spacing.lg,
   paddingHorizontal: spacing.md,
 }
 
-const $screenContentContainer: ViewStyle = {
-  flex: 1,
-  paddingHorizontal: spacing.md,
-}
-
-const $signInScreen: TextStyle = {
+const $heading: TextStyle = {
   marginBottom: spacing.sm,
 }
 
-const $enterDetails: TextStyle = {
+const $subtitle: TextStyle = {
   marginBottom: spacing.lg,
 }
 

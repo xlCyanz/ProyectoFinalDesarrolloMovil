@@ -4,13 +4,13 @@ import { ContentStyle } from "@shopify/flash-list"
 import { Drawer } from "react-native-drawer-layout"
 import { ActivityIndicator, FlatList, TextStyle, View, ViewStyle } from "react-native"
 
-import { useStores } from "app/models"
-import { delay } from "app/utils/delay"
-import { colors, spacing } from "app/theme"
-import { IVolunteerNews } from "app/services/api"
-import { VolunteeringStackScreenProps } from "app/navigators"
-import { useSafeAreaInsetsStyle } from "app/utils/useSafeAreaInsetsStyle"
-import { CardImage, DrawerIconButton, DrawerListItem, EmptyState, IDrawerListItemProps, Icon, ListView, ListViewRef, Screen, Text } from "app/components"
+import { useStores } from "../models"
+import { delay } from "../utils/delay"
+import { colors, spacing } from "../theme"
+import { IVolunteerNews } from "../services/api"
+import { VolunteeringStackScreenProps } from "../navigators"
+import { useSafeAreaInsetsStyle } from "../utils/useSafeAreaInsetsStyle"
+import { CardImage, DrawerIconButton, DrawerListItem, EmptyState, IDrawerListItemProps, Icon, ListView, ListViewRef, Screen, Text } from "../components"
 
 interface VolunteeringScreenProps extends VolunteeringStackScreenProps<"Volunteering"> { }
 

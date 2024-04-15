@@ -2,7 +2,7 @@ import { observer } from "mobx-react-lite"
 import React, { FC } from "react"
 import { Image, ImageStyle, TextStyle, View, ViewStyle } from "react-native"
 
-import { Button, Text } from "app/components"
+import { Button, Text } from "../components"
 import { colors, spacing } from "../theme"
 import { AppStackScreenProps } from "../navigators"
 import { useSafeAreaInsetsStyle } from "../utils/useSafeAreaInsetsStyle"

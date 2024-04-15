@@ -1,7 +1,7 @@
 import React from 'react'
 import { Image, ImageStyle, TextStyle, View, ViewStyle } from 'react-native'
 
-import { colors, spacing } from 'app/theme'
+import { colors, spacing } from '../theme'
 
 import { Card } from './Card'
 import { Text } from './Text'

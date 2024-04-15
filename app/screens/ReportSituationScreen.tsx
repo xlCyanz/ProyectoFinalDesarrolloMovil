@@ -1,5 +1,6 @@
 import React, { FC } from "react"
 import { observer } from "mobx-react-lite"
+import * as Location from 'expo-location';
 import * as ImagePicker from 'expo-image-picker';
 import { FormProvider, useForm } from "react-hook-form"
 import { ActivityIndicator, Alert, Image, ImageStyle, TextStyle, View, ViewStyle } from "react-native"
@@ -25,6 +26,23 @@ export const ReportSituationScreen: FC<ReportSituationScreenProps> = observer(fu
   const methods = useForm<FormValues>();
 
   const [photo, setPhoto] = React.useState("");
+
+  const [location, setLocation] = React.useState<Location.LocationObject | null>(null);
+  const [errorMsg, setErrorMsg] = React.useState<string | null>(null);
+
+  React.useEffect(() => {
+    (async () => {
+
+      const { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== 'granted') {
+        setErrorMsg('Permission to access location was denied');
+        return;
+      }
+
+      const location = await Location.getCurrentPositionAsync({});
+      setLocation(location);
+    })();
+  }, []);
 
   return (
     <Screen
@@ -59,7 +77,6 @@ export const ReportSituationScreen: FC<ReportSituationScreenProps> = observer(fu
               <Button text="Eliminar imagen" preset="filled" onPress={() => setPhoto("")} />
             </View>
           ) : (
-
             <Button
               preset="filled"
               text="Seleccionar foto"
@@ -105,6 +122,16 @@ export const ReportSituationScreen: FC<ReportSituationScreenProps> = observer(fu
           labelTx="VolunteeringNavigator.reportSituationScreen.inputs.longitudeFieldLabel"
           placeholderTx="VolunteeringNavigator.reportSituationScreen.inputs.longitudeFieldPlaceholder"
         />
+        {!errorMsg && (
+          <Button
+            preset="filled"
+            text="Rellenar con mi ubicación actual"
+            onPress={async () => {
+              methods.setValue("latitude", `${location?.coords.latitude ?? 0}`)
+              methods.setValue("longitude", `${location?.coords.longitude ?? 0}`)
+            }}
+          />
+        )}
         {methods.formState.isSubmitting ? <ActivityIndicator size={50} /> : (
           <Button
             testID="login-button"
@@ -116,7 +143,7 @@ export const ReportSituationScreen: FC<ReportSituationScreenProps> = observer(fu
 
               if (response.success) {
                 Alert.alert("Situación reportada con éxito!", "Las autoridades próximamente la revisaran.");
-                // navigation.navigate()
+                navigation.navigate("SituationsMap")
               } else {
                 Alert.alert("Hubo un error con la petición al servidor.", response.message)
               }

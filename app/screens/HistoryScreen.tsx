@@ -2,9 +2,9 @@ import React, { FC } from "react"
 import { observer } from "mobx-react-lite"
 import { ImageStyle, TextStyle, ViewStyle } from "react-native"
 
-import { spacing } from "app/theme"
-import { AppStackScreenProps } from "app/navigators"
-import { Icon, Screen, Text } from "app/components"
+import { spacing } from "../theme"
+import { AppStackScreenProps } from "../navigators"
+import { Icon, Screen, Text } from "../components"
 
 interface HistoryScreenProps extends AppStackScreenProps<"History"> { }
 

@@ -1,14 +1,14 @@
 import React, { FC, useEffect, useRef, useState } from "react"
 import { observer } from "mobx-react-lite"
 import { ContentStyle } from "@shopify/flash-list"
-import { ActivityIndicator, FlatList, ImageStyle, ViewStyle } from "react-native"
+import { ActivityIndicator, Dimensions, ImageStyle, View, ViewStyle } from "react-native"
 
-import { spacing } from "app/theme"
-import { useStores } from "app/models"
-import { delay } from "app/utils/delay"
-import { IPrecautionaryMeasures } from "app/services/api"
-import { AppStackScreenProps } from "app/navigators"
-import { CardImage, EmptyState, Icon, Screen, Text } from "app/components"
+import { spacing } from "../theme"
+import { useStores } from "../models"
+import { delay } from "../utils/delay"
+import { IPrecautionaryMeasures } from "../services/api"
+import { AppStackScreenProps } from "../navigators"
+import { CardImage, EmptyState, Icon, ListView, Screen, Text } from "../components"
 
 interface MeasuresScreenProps extends AppStackScreenProps<"Measures"> { }
 
@@ -41,13 +41,19 @@ export const MeasuresScreen: FC<MeasuresScreenProps> = observer(function Measure
 
   return (
     <Screen preset="fixed" safeAreaEdges={["top"]} style={$screenContentContainer}>
-      {navigation.canGoBack() ? (
-        <Icon icon="back" size={30} style={$backIcon} onPress={navigation.goBack} />
-      ) : null}
-      <Text testID="login-heading" tx="MainNavigator.measuresScreen.title" preset="heading" />
-      <FlatList<IPrecautionaryMeasures>
+      <ListView<IPrecautionaryMeasures>
         refreshing={refreshing}
         onRefresh={manualRefresh}
+        ListHeaderComponent={
+          <View>
+            {navigation.canGoBack() ? (
+              <Icon icon="back" size={30} style={$backIcon} onPress={navigation.goBack} />
+            ) : null}
+            <Text testID="login-heading" tx="MainNavigator.measuresScreen.title" preset="heading" />
+          </View>
+        }
+        estimatedItemSize={100}
+        estimatedListSize={{ height: Dimensions.get("screen").height, width: Dimensions.get("screen").width }}
         data={measuresStore.measuresList.slice()}
         contentContainerStyle={$listContentContainer}
         ListEmptyComponent={
@@ -67,20 +73,20 @@ export const MeasuresScreen: FC<MeasuresScreenProps> = observer(function Measure
         renderItem={({ item }) => (
           <CardImage onPress={() => {
             navigation.navigate("MeasureDetails", { id: item.id })
-          }} title={item.descripcion.substring(0, 100).concat("...")} subtitle="" photo={item.foto} />
+          }} title={item.descripcion.substring(0, 100).concat("...")} subtitle={item.titulo ?? ""} photo={item.foto} />
         )}
       />
     </Screen>
   )
 })
 
-const $listContentContainer: ContentStyle = {
-  paddingHorizontal: spacing.md,
-  paddingBottom: spacing.xl,
-}
-
 const $screenContentContainer: ViewStyle = {
   flex: 1,
+  flexDirection: "row",
+}
+
+const $listContentContainer: ContentStyle = {
+  paddingBottom: spacing.xl,
   paddingHorizontal: spacing.md,
 }
 

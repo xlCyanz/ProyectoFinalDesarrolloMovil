@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, ViewStyle } from 'react-native'
 
-import { spacing } from 'app/theme';
+import { spacing } from '../theme';
 
 import { Text } from './Text';
 import { ListItem } from './ListItem';

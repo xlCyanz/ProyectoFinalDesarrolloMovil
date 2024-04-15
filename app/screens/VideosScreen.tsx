@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { ContentStyle } from "@shopify/flash-list";
 import YoutubePlayer from "react-native-youtube-iframe";
-import { ActivityIndicator, FlatList, ImageStyle, TextStyle, View, ViewStyle } from "react-native";
-import { AppStackScreenProps } from "app/navigators"
+import { ActivityIndicator, Dimensions, ImageStyle, TextStyle, View, ViewStyle } from "react-native";
+import { AppStackScreenProps } from "../navigators"
 
-import { useStores } from "app/models";
-import { IVideo } from "app/services/api"
-import { delay } from "app/utils/delay";
+import { useStores } from "../models";
+import { IVideo } from "../services/api"
+import { delay } from "../utils/delay";
 
 import { colors, spacing } from "../theme"
-import { EmptyState, Icon, ListItem, Screen, Text } from "../components"
+import { EmptyState, Icon, ListItem, ListView, Screen, Text } from "../components"
 
 export const VideosScreen: React.FC<AppStackScreenProps<"Videos">> = function VideosScreen(
   { navigation },
@@ -35,16 +35,22 @@ export const VideosScreen: React.FC<AppStackScreenProps<"Videos">> = function Vi
 
   return (
     <Screen preset="fixed" safeAreaEdges={["top"]} contentContainerStyle={$container}>
-      {navigation.canGoBack() ? (
-        <Icon icon="back" size={30} style={$backIcon} onPress={navigation.goBack} />
-      ) : null}
-      <Text style={$title} preset="heading" tx="MainNavigator.videosScreen.title" />
       <View>
-        <FlatList<IVideo>
+        <ListView<IVideo>
           refreshing={refreshing}
           onRefresh={manualRefresh}
           data={videosStore.videosList.slice()}
           contentContainerStyle={$listContentContainer}
+          estimatedItemSize={100}
+          estimatedListSize={{ height: Dimensions.get("screen").height, width: Dimensions.get("screen").width }}
+          ListHeaderComponent={
+            <View>
+              {navigation.canGoBack() ? (
+                <Icon icon="back" size={30} style={$backIcon} onPress={navigation.goBack} />
+              ) : null}
+              <Text style={$title} preset="heading" tx="MainNavigator.videosScreen.title" />
+            </View>
+          }
           ListEmptyComponent={
             isLoading ? (
               <ActivityIndicator size={50} />
@@ -81,9 +87,13 @@ export const VideosScreen: React.FC<AppStackScreenProps<"Videos">> = function Vi
 }
 
 const $container: ViewStyle = {
-  paddingTop: spacing.lg,
-  paddingBottom: spacing.xxl,
-  paddingHorizontal: spacing.lg,
+  flex: 1,
+  flexDirection: "row",
+}
+
+const $listContentContainer: ContentStyle = {
+  paddingBottom: spacing.lg,
+  paddingHorizontal: spacing.md,
 }
 
 const $title: TextStyle = {
@@ -94,13 +104,10 @@ const $item: ViewStyle = {
   marginBottom: spacing.md,
 }
 
-const $listContentContainer: ContentStyle = {
-  paddingBottom: spacing.lg,
-}
-
 const $br: ViewStyle = {
   height: 2,
   width: "100%",
+  marginTop: spacing.lg,
   backgroundColor: colors.separator,
 }
 

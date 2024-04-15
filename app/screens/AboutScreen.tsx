@@ -1,7 +1,7 @@
 import React from "react";
 import * as Application from "expo-application";
 import { TextStyle, View, ViewStyle } from "react-native";
-import { MainTabScreenProps } from "app/navigators"
+import { MainTabScreenProps } from "../navigators"
 
 import { spacing } from "../theme"
 import { ListItem, Screen, Text } from "../components"

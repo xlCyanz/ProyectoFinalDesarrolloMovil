@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { ActivityIndicator, Image, ImageStyle, TextStyle, View, ViewStyle } from "react-native";
 
-import { useStores } from "app/models";
-import { AppStackScreenProps } from "app/navigators"
+import { useStores } from "../models";
+import { AppStackScreenProps } from "../navigators"
 import { Icon, ListItem, Screen, Text } from "../components"
 
 import { spacing } from "../theme"
-import { IPrecautionaryMeasures } from "app/services/api";
+import { IPrecautionaryMeasures } from "../services/api";
 
 export const MeasureDetailsScreen: React.FC<AppStackScreenProps<"MeasureDetails">> = function EventDetails(
   { navigation, route },

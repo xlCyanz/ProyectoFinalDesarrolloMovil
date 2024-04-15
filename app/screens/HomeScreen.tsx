@@ -6,7 +6,7 @@ import Onboarding from 'react-native-onboarding-swiper';
 import { type ContentStyle } from "@shopify/flash-list"
 
 import { colors, spacing } from "../theme"
-import { MainTabScreenProps } from "app/navigators"
+import { MainTabScreenProps } from "../navigators"
 import { useSafeAreaInsetsStyle } from "../utils/useSafeAreaInsetsStyle"
 import { DrawerIconButton, ListItem, ListView, ListViewRef, Screen, Text } from "../components"
 

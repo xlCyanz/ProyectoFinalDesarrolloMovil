@@ -6,7 +6,7 @@ import { BottomTabScreenProps, createBottomTabNavigator } from "@react-navigatio
 
 import { Icon } from "../components"
 import { translate } from "../i18n"
-import * as Screens from "app/screens"
+import * as Screens from "../screens"
 import { colors, spacing, typography } from "../theme"
 import { AppStackParamList, AppStackScreenProps } from "./AppNavigator"
 import { VolunteeringNavigator, VolunteeringStackParamList } from "./VolunteeringNavigator"

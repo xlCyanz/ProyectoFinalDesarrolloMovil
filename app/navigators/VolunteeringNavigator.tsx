@@ -2,8 +2,8 @@ import React from "react"
 import { NativeStackScreenProps, createNativeStackNavigator } from "@react-navigation/native-stack"
 import { observer } from "mobx-react-lite"
 
-import { useStores } from "app/models"
-import * as Screens from "app/screens"
+import { useStores } from "../models"
+import * as Screens from "../screens"
 import { CompositeScreenProps } from "@react-navigation/native"
 import { AppStackParamList, AppStackScreenProps } from "./AppNavigator"
 

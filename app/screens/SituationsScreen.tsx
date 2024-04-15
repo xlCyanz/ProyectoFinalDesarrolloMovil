@@ -1,14 +1,14 @@
 import React, { FC, useEffect, useRef, useState } from "react"
 import { observer } from "mobx-react-lite"
 import { ContentStyle } from "@shopify/flash-list"
-import { ActivityIndicator, FlatList, ImageStyle, ViewStyle } from "react-native"
+import { ActivityIndicator, Dimensions, ImageStyle, View, ViewStyle } from "react-native"
 
-import { spacing } from "app/theme"
-import { useStores } from "app/models"
-import { delay } from "app/utils/delay"
-import { ISituationOut } from "app/services/api"
-import { VolunteeringStackScreenProps } from "app/navigators"
-import { CardImage, EmptyState, Icon, Screen, Text } from "app/components"
+import { spacing } from "../theme"
+import { useStores } from "../models"
+import { delay } from "../utils/delay"
+import { ISituationOut } from "../services/api"
+import { VolunteeringStackScreenProps } from "../navigators"
+import { CardImage, EmptyState, Icon, ListView, Screen, Text } from "../components"
 
 interface SituationsScreenProps extends VolunteeringStackScreenProps<"Situations"> { }
 
@@ -41,15 +41,23 @@ export const SituationsScreen: FC<SituationsScreenProps> = observer(function Sit
 
   return (
     <Screen preset="fixed" safeAreaEdges={["top"]} style={$screenContentContainer}>
-      {navigation.canGoBack() ? (
-        <Icon icon="back" size={30} style={$backIcon} onPress={navigation.goBack} />
-      ) : null}
-      <Text testID="login-heading" tx="VolunteeringNavigator.situationsScreen.title" preset="heading" />
-      <FlatList<ISituationOut>
+      <ListView<ISituationOut>
         refreshing={refreshing}
-        onRefresh={manualRefresh}
-        data={volunteerStore.situationsList.slice()}
+        estimatedItemSize={120}
+        estimatedListSize={{ height: Dimensions.get("screen").height, width: Dimensions.get("screen").width }}
         contentContainerStyle={$listContentContainer}
+        onRefresh={manualRefresh}
+        ListHeaderComponent={
+          <View>
+            {navigation.canGoBack() ? (
+              <Icon icon="back" size={30} style={$backIcon} onPress={navigation.goBack} />
+            ) : null}
+            <View>
+              <Text testID="login-heading" tx="VolunteeringNavigator.situationsScreen.title" preset="heading" />
+            </View>
+          </View>
+        }
+        data={volunteerStore.situationsList.slice()}
         ListEmptyComponent={
           isLoading ? (
             <ActivityIndicator size={50} />
@@ -74,16 +82,16 @@ export const SituationsScreen: FC<SituationsScreenProps> = observer(function Sit
   )
 })
 
-const $listContentContainer: ContentStyle = {
-  paddingHorizontal: spacing.md,
-  paddingBottom: spacing.lg,
-}
-
 const $screenContentContainer: ViewStyle = {
   flex: 1,
-  paddingHorizontal: spacing.md,
+  flexDirection: "row",
 }
 
 const $backIcon: ImageStyle = {
   marginVertical: spacing.md
+}
+
+const $listContentContainer: ContentStyle = {
+  paddingBottom: spacing.md,
+  paddingHorizontal: spacing.md,
 }

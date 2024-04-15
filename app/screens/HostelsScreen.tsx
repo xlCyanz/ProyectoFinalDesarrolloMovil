@@ -1,14 +1,14 @@
 import React, { FC, useEffect, useRef, useState } from "react"
 import { observer } from "mobx-react-lite"
 import { ContentStyle } from "@shopify/flash-list"
-import { ActivityIndicator, FlatList, ImageStyle, ViewStyle } from "react-native"
+import { ActivityIndicator, Dimensions, ImageStyle, View, ViewStyle } from "react-native"
 
-import { spacing } from "app/theme"
-import { useStores } from "app/models"
-import { delay } from "app/utils/delay"
-import { IHostel } from "app/services/api"
-import { AppStackScreenProps } from "app/navigators"
-import { CardImage, EmptyState, Icon, Screen, Text } from "app/components"
+import { spacing } from "../theme"
+import { useStores } from "../models"
+import { delay } from "../utils/delay"
+import { IHostel } from "../services/api"
+import { AppStackScreenProps } from "../navigators"
+import { CardImage, EmptyState, Icon, ListView, Screen, Text } from "../components"
 
 interface HostelsScreenProps extends AppStackScreenProps<"Hostels"> { }
 
@@ -41,15 +41,21 @@ export const HostelsScreen: FC<HostelsScreenProps> = observer(function HostelsSc
 
   return (
     <Screen preset="fixed" safeAreaEdges={["top"]} style={$screenContentContainer}>
-      {navigation.canGoBack() ? (
-        <Icon icon="back" size={30} style={$backIcon} onPress={navigation.goBack} />
-      ) : null}
-      <Text testID="login-heading" tx="MainNavigator.hostelsScreen.title" preset="heading" />
-      <FlatList<IHostel>
+      <ListView<IHostel>
         refreshing={refreshing}
         onRefresh={manualRefresh}
+        estimatedItemSize={100}
+        estimatedListSize={{ height: Dimensions.get("screen").height, width: Dimensions.get("screen").width }}
         data={hostelStore.hostelsList.slice()}
         contentContainerStyle={$listContentContainer}
+        ListHeaderComponent={
+          <View>
+            {navigation.canGoBack() ? (
+              <Icon icon="back" size={30} style={$backIcon} onPress={navigation.goBack} />
+            ) : null}
+            <Text testID="login-heading" tx="MainNavigator.hostelsScreen.title" preset="heading" />
+          </View>
+        }
         ListEmptyComponent={
           isLoading ? (
             <ActivityIndicator size={50} />
@@ -74,13 +80,13 @@ export const HostelsScreen: FC<HostelsScreenProps> = observer(function HostelsSc
   )
 })
 
-const $listContentContainer: ContentStyle = {
-  paddingHorizontal: spacing.md,
-  paddingBottom: spacing.lg,
-}
-
 const $screenContentContainer: ViewStyle = {
   flex: 1,
+  flexDirection: "row",
+}
+
+const $listContentContainer: ContentStyle = {
+  paddingBottom: spacing.xl,
   paddingHorizontal: spacing.md,
 }
 

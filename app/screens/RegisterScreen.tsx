@@ -6,7 +6,7 @@ import { Button, ControllerTextInput, Icon, Screen, Text, TextFieldAccessoryProp
 
 import { useStores } from "../models"
 import { colors, spacing } from "../theme"
-import { IVolunteer } from "app/services/api"
+import { IVolunteer } from "../services/api"
 import { AppStackScreenProps } from "../navigators"
 
 interface RegisterScreenProps extends AppStackScreenProps<"Register"> { }

@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { ActivityIndicator, Image, ImageStyle, TextStyle, View, ViewStyle } from "react-native";
 
-import { useStores } from "app/models";
-import { VolunteeringStackScreenProps } from "app/navigators"
+import { useStores } from "../models";
+import { VolunteeringStackScreenProps } from "../navigators"
 import { Icon, ListItem, Screen, Text } from "../components"
 
 import { spacing } from "../theme"
-import { VolunteerNews } from "app/models/VolunteerNewsModel";
+import { VolunteerNews } from "../models/VolunteerNewsModel";
 
 export const VolunteeringNewsDetailsScreen: React.FC<VolunteeringStackScreenProps<"VolunteeringNewsDetails">> = function EventDetails(
   { navigation, route },

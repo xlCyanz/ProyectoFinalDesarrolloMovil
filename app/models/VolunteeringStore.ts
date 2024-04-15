@@ -1,6 +1,6 @@
 import { Instance, SnapshotOut, types } from "mobx-state-tree"
 
-import { ISituationIn, IVolunteer, api } from "app/services/api"
+import { ISituationIn, IVolunteer, api } from "../services/api"
 import { VolunteerNewsModel } from "./VolunteerNewsModel";
 import { withSetPropAction } from "./helpers/withSetPropAction"
 import { SituationModel } from "./SituationModel";

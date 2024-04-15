@@ -1,5 +1,5 @@
 /**
- * The app navigator (formerly "AppNavigator" and "MainNavigator") is used for the primary
+ * The app navigator (formerly "..Navigator" and "MainNavigator") is used for the primary
  * navigation flows of your app.
  * Generally speaking, it will contain an auth flow (registration, login, forgot password)
  * and a "main" flow which the user will use once logged in.
@@ -15,8 +15,8 @@ import {
 } from "@react-navigation/native"
 import { createNativeStackNavigator, NativeStackScreenProps } from "@react-navigation/native-stack"
 
-import { colors } from "app/theme"
-import * as Screens from "app/screens"
+import { colors } from "../theme"
+import * as Screens from "../screens"
 import Config from "../config"
 import { navigationRef, useBackButtonHandler } from "./navigationUtilities"
 import { MainNavigator, MainTabParamList } from "./MainNavigator"

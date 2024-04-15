@@ -1,24 +1,33 @@
 import React, { FC } from "react"
-import { ImageStyle, ViewStyle } from "react-native"
+import { ImageStyle, View, ViewStyle } from "react-native"
 import { observer } from "mobx-react-lite"
 
 import { spacing } from "../theme"
 import { Icon, Screen, Text, } from "../components"
-import { AppStackScreenProps } from "app/navigators"
+import { AppStackScreenProps } from "../navigators"
 import MapView, { Marker } from "react-native-maps"
-import { useStores } from "app/models"
+import { useStores } from "../models"
+import { useFocusEffect } from "@react-navigation/native"
 
 interface HostelsMapScreenProps extends AppStackScreenProps<"HostelsMap"> { }
 
 export const HostelsMapScreen: FC<HostelsMapScreenProps> = observer(function HostelsMapScreen({ navigation }) {
   const { hostelStore } = useStores();
 
+  useFocusEffect(() => {
+    ; (async function load() {
+      await hostelStore.fetchHostels();
+    })()
+  })
+
   return (
     <Screen preset="fixed" safeAreaEdges={["top"]} contentContainerStyle={$screenContentContainer}>
-      {navigation.canGoBack() ? (
-        <Icon icon="back" size={30} style={$backIcon} onPress={navigation.goBack} />
-      ) : null}
-      <Text text="Mapa de albergues" preset="heading" />
+      <View style={$screenHeaderContainer}>
+        {navigation.canGoBack() ? (
+          <Icon icon="back" size={30} style={$backIcon} onPress={navigation.goBack} />
+        ) : null}
+        <Text text="Mapa de albergues" preset="heading" />
+      </View>
       <MapView
         initialRegion={{
           latitude: 18,
@@ -28,7 +37,7 @@ export const HostelsMapScreen: FC<HostelsMapScreenProps> = observer(function Hos
         }}
         style={$mapView}
       >
-        {hostelStore.hostelsList.length &&
+        {!!hostelStore.hostelsList.length &&
           hostelStore.hostelsList.map(rf => {
             return (
               <Marker
@@ -49,6 +58,9 @@ export const HostelsMapScreen: FC<HostelsMapScreenProps> = observer(function Hos
 
 const $screenContentContainer: ViewStyle = {
   flex: 1,
+}
+
+const $screenHeaderContainer: ViewStyle = {
   paddingHorizontal: spacing.md
 }
 

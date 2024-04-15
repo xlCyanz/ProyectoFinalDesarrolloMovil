@@ -1,6 +1,6 @@
 import { Instance, SnapshotOut, types } from "mobx-state-tree"
 
-import { api } from "app/services/api"
+import { api } from "../services/api"
 import { withSetPropAction } from "./helpers/withSetPropAction"
 import { VideoModel } from "./VideoModel";
 

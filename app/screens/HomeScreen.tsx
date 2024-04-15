@@ -10,7 +10,7 @@ import { MainTabScreenProps } from "app/navigators"
 import { useSafeAreaInsetsStyle } from "../utils/useSafeAreaInsetsStyle"
 import { DrawerIconButton, ListItem, ListView, ListViewRef, Screen, Text } from "../components"
 
-const logo = require("../../assets/images/logo1.png")
+const logo = require("../../assets/images/logo.png")
 
 interface DemoListItem {
   onPress?: (screenName: string) => void;
